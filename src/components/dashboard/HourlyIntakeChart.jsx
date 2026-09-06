@@ -41,7 +41,7 @@ export const HourlyIntakeChart = () => {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical flex flex-col justify-between h-full">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical flex flex-col justify-between h-full min-w-0">
       {/* Header and Legend */}
       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
         <div>
@@ -52,7 +52,7 @@ export const HourlyIntakeChart = () => {
         </div>
 
         {/* Legend */}
-        <div className="flex items-center gap-4 text-xs font-semibold text-slate-600">
+        <div className="flex items-center gap-2.5 sm:gap-4 text-xs font-semibold text-slate-600 flex-wrap">
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-xs bg-white border border-slate-300 shadow-2xs" />
             <span>Normal</span>
@@ -69,8 +69,8 @@ export const HourlyIntakeChart = () => {
       </div>
 
       {/* Chart Plot area with soft cyan background matching screenshot */}
-      <div className="relative bg-[#dcf3f9] rounded-2xl p-4 pt-6">
-        <div className="h-44 w-full">
+      <div className="relative bg-[#dcf3f9] rounded-2xl p-3 sm:p-4 pt-5 sm:pt-6 min-w-0">
+        <div className="h-40 sm:h-44 w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={hourlyIntakeData}

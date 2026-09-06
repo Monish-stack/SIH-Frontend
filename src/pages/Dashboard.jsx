@@ -100,7 +100,7 @@ export const Dashboard = () => {
               High Priority
             </span>
             <span className="text-xs font-extrabold text-[#8b0000] tracking-tight">
-              RequireSpecialist
+              Require Specialist
             </span>
           </div>
         </div>
@@ -124,7 +124,7 @@ export const Dashboard = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-white" />
               Verified
             </span>
-            <span className="text-xs font-bold text-[#0284c7]">87.5%complete</span>
+            <span className="text-xs font-bold text-[#0284c7]">87.5% complete</span>
           </div>
         </div>
       </div>

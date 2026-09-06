@@ -6,10 +6,11 @@ import {
   Users, 
   TrendingUp, 
   Settings, 
-  HelpCircle 
+  HelpCircle,
+  X
 } from 'lucide-react';
 
-export const Sidebar = () => {
+export const Sidebar = ({ onClose, isMobile = false }) => {
   const location = useLocation();
 
   const mainNavItems = [
@@ -65,11 +66,40 @@ export const Sidebar = () => {
     return false;
   };
 
+  const handleNavClick = () => {
+    if (isMobile && onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <aside className="w-[230px] h-[calc(100vh-28px)] sticky top-3.5 my-3.5 ml-4 flex-shrink-0 bg-[#06073b] text-white rounded-[32px] p-5 flex flex-col justify-between shadow-2xl z-30 select-none">
+    <div className={`flex flex-col justify-between h-full text-white select-none ${
+      isMobile ? 'p-6' : 'p-5'
+    }`}>
       <div className="flex flex-col space-y-2">
+        {/* Mobile Drawer Header with Close Button */}
+        {isMobile && (
+          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-2">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-xl bg-[#0284c7] flex items-center justify-center font-bold text-white shadow-xs">
+                RS
+              </div>
+              <span className="font-bold text-base tracking-tight text-white">
+                RetinaScan AI
+              </span>
+            </div>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        )}
+
         {/* Main Navigation links */}
-        <nav className="space-y-2 pt-2">
+        <nav className="space-y-2 pt-1">
           {mainNavItems.map((item) => {
             const active = isItemActive(item);
             const Icon = item.icon;
@@ -77,6 +107,7 @@ export const Sidebar = () => {
               <NavLink
                 key={item.name}
                 to={item.path}
+                onClick={handleNavClick}
                 className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
                   active
                     ? 'bg-[#0284c7] text-white shadow-sm'
@@ -105,6 +136,7 @@ export const Sidebar = () => {
             <NavLink
               key={item.name}
               to={item.path}
+              onClick={handleNavClick}
               className={`flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-150 ${
                 active
                   ? 'bg-[#0284c7] text-white'
@@ -117,6 +149,6 @@ export const Sidebar = () => {
           );
         })}
       </div>
-    </aside>
+    </div>
   );
 };

@@ -39,7 +39,7 @@ export const PatientDetails = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/patients')}
-            className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 flex items-center justify-center text-slate-700 shadow-2xs transition-colors"
+            className="w-10 h-10 sm:w-9 sm:h-9 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 flex items-center justify-center text-slate-700 shadow-2xs transition-colors flex-shrink-0"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
@@ -47,23 +47,23 @@ export const PatientDetails = () => {
             <span className="text-[11px] font-bold text-teal-600 uppercase tracking-widest block">
               PATIENT DOSSIER & RETINAL RECORD
             </span>
-            <h1 className="text-2xl font-extrabold text-[#0c1236]">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-[#0c1236]">
               {patient.name} ({patient.id})
             </h1>
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => showToast('Dossier exported to hospital DICOM/EHR repository', 'success')}
-            className="flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs"
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs min-h-[44px] sm:min-h-0"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Record</span>
           </button>
           <button
             onClick={handleStartScreening}
-            className="flex items-center gap-1.5 px-5 py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm"
+            className="flex items-center justify-center gap-1.5 px-5 py-2.5 sm:py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm min-h-[44px] sm:min-h-0"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Start Screening Protocol</span>
@@ -178,11 +178,13 @@ export const PatientDetails = () => {
       </div>
 
       {/* Longitudinal History */}
-      <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
+      <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
         <h2 className="text-lg font-bold text-[#0c1236]">
           Screening Longitudinal History
         </h2>
-        <div className="overflow-x-auto">
+
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
@@ -215,6 +217,37 @@ export const PatientDetails = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden space-y-3">
+          {patientLongitudinalHistory.map((item, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900">{item.session}</span>
+                <StatusBadge text={item.overall} />
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200 text-[11px]">
+                <div>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Left Eye</span>
+                  <span className="font-semibold text-emerald-700">{item.leftEye}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Right Eye</span>
+                  <span className="font-semibold text-slate-800">{item.rightEye}</span>
+                </div>
+              </div>
+              <div className="pt-2 border-t border-slate-200 flex justify-end">
+                <button
+                  onClick={() => showToast(`Opening ${item.reportId}`, 'info')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[#0284c7] font-semibold text-xs min-h-[36px]"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>{item.reportId}</span>
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

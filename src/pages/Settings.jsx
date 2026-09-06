@@ -49,7 +49,7 @@ export const Settings = () => {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Hardware & Station Setup */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
           <div className="flex items-center gap-2.5 pb-2 border-b border-slate-100">
             <Camera className="w-5 h-5 text-[#0284c7]" />
             <h2 className="text-base font-bold text-[#0c1236]">Screening Station & Hardware</h2>
@@ -103,7 +103,7 @@ export const Settings = () => {
         </div>
 
         {/* PACS / DICOM Bridge */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-slate-100">
             <div className="flex items-center gap-2.5">
               <Database className="w-5 h-5 text-[#0284c7]" />
@@ -143,7 +143,7 @@ export const Settings = () => {
         </div>
 
         {/* AI Model & Screening Sensitivity */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
           <div className="flex items-center gap-2.5 pb-2 border-b border-slate-100">
             <Cpu className="w-5 h-5 text-[#0284c7]" />
             <h2 className="text-base font-bold text-[#0c1236]">AI Diagnostic & Triage Gate</h2>
@@ -176,7 +176,7 @@ export const Settings = () => {
         </div>
 
         {/* Operator Profile */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
           <div className="flex items-center gap-2.5 pb-2 border-b border-slate-100">
             <User className="w-5 h-5 text-[#0284c7]" />
             <h2 className="text-base font-bold text-[#0c1236]">Operator Credentials</h2>
@@ -209,7 +209,7 @@ export const Settings = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="flex items-center gap-2 px-6 py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-md transition-all active:scale-[0.98] w-full sm:w-auto min-h-[44px]"
           >
             <Save className="w-4 h-4" />
             <span>Save Configuration</span>

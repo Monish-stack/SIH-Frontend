@@ -85,8 +85,8 @@ export const Analytics = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <select className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 shadow-2xs focus:outline-none">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+          <select className="px-3.5 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 shadow-2xs focus:outline-none min-h-[44px] sm:min-h-0">
             <option>Last 30 Days</option>
             <option>Last 7 Days</option>
             <option>This Quarter</option>
@@ -95,7 +95,7 @@ export const Analytics = () => {
 
           <button
             onClick={() => showToast('Cohort Report generated and downloaded (Excel / PDF)', 'success')}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors"
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors min-h-[44px] sm:min-h-0"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Report</span>
@@ -222,19 +222,19 @@ export const Analytics = () => {
       {/* Row 2: Screening Activity Chart & Screening Result Distribution (Donut) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Screening Activity Area Chart (8 cols) */}
-        <div className="lg:col-span-8 bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical flex flex-col justify-between">
+        <div className="lg:col-span-8 bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical flex flex-col justify-between min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <h2 className="text-base font-bold text-[#0c1236]">Screening Activity</h2>
               <p className="text-xs text-slate-500">Screening throughput compared to regional benchmark</p>
             </div>
 
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs">
+            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs overflow-x-auto no-scrollbar">
               {['7 Days', '30 Days', '3 Months'].map((tf) => (
                 <button
                   key={tf}
                   onClick={() => setActivityTimeframe(tf)}
-                  className={`px-3 py-1 rounded-lg font-semibold transition-colors ${
+                  className={`px-3 py-1 rounded-lg font-semibold transition-colors whitespace-nowrap ${
                     activityTimeframe === tf
                       ? 'bg-[#0284c7] text-white shadow-2xs'
                       : 'text-slate-600 hover:text-slate-900'
@@ -246,7 +246,7 @@ export const Analytics = () => {
             </div>
           </div>
 
-          <div className="h-60 w-full pt-2">
+          <div className="h-56 sm:h-60 w-full min-w-0 pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={activityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
@@ -282,14 +282,14 @@ export const Analytics = () => {
         </div>
 
         {/* Right: Screening Result Distribution Donut (4 cols) */}
-        <div className="lg:col-span-4 bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical flex flex-col justify-between min-w-0">
           <div>
             <h2 className="text-base font-bold text-[#0c1236]">Result Distribution</h2>
             <p className="text-xs text-slate-500">Bilateral triage outcome proportions</p>
           </div>
 
           {/* Donut Chart Container */}
-          <div className="relative h-48 w-full flex items-center justify-center my-2">
+          <div className="relative h-48 w-full min-w-0 flex items-center justify-center my-2">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -511,7 +511,7 @@ export const Analytics = () => {
       </div>
 
       {/* Recent Referable Screenings Table */}
-      <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
+      <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-bold text-[#0c1236]">Recent Referable Screenings</h3>
@@ -522,7 +522,8 @@ export const Analytics = () => {
           </span>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
@@ -563,6 +564,43 @@ export const Analytics = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden space-y-3">
+          {recentReferableScreenings.map((item, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <span className="font-bold text-slate-900 text-sm block">{item.patientName}</span>
+                  <span className="text-[11px] font-semibold text-slate-500">{item.patientId} • {item.date}</span>
+                </div>
+                <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-[#8b0000]">
+                  {item.affectedEye}
+                </span>
+              </div>
+
+              <div className="p-2.5 rounded-xl bg-white border border-slate-200 space-y-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="font-bold text-[#8b0000]">{item.classification}</span>
+                  <span className="font-bold text-slate-800">Conf: {item.confidence}</span>
+                </div>
+                <p className="text-[11px] text-slate-600">
+                  {item.action}
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-slate-200">
+                <button
+                  onClick={() => showToast(`Opening referral dispatch for ${item.patientName}`, 'info')}
+                  className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#8b0000] hover:bg-rose-900 text-white rounded-xl text-xs font-bold shadow-xs min-h-[44px]"
+                >
+                  <span>Dispatch Specialist Referral</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

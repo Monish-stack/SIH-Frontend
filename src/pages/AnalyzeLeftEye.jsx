@@ -169,40 +169,40 @@ export const AnalyzeLeftEye = () => {
             </div>
 
             {/* Viewer Display Window */}
-            <div className="relative w-full h-[460px] bg-[#070a1a] rounded-2xl overflow-hidden flex items-center justify-center shadow-inner select-none border border-slate-900">
+            <div className="relative w-full h-[300px] sm:h-[380px] lg:h-[460px] bg-[#070a1a] rounded-2xl overflow-hidden flex items-center justify-center shadow-inner select-none border border-slate-900">
               {/* Fundus Image with transform zoom */}
               <motion.div
                 style={{ scale: zoomLevel }}
-                className="relative max-h-full aspect-square flex items-center justify-center"
+                className="relative max-h-full aspect-square flex items-center justify-center p-2"
               >
                 <img
                   src={leftEyeImage}
                   alt="Left Eye Fundus"
-                  className="max-h-[440px] max-w-full object-contain rounded-full border border-orange-500/20 shadow-2xl"
+                  className="max-h-[280px] sm:max-h-[360px] lg:max-h-[440px] max-w-full object-contain rounded-full border border-orange-500/20 shadow-2xl"
                 />
 
                 {/* Clinical Overlays & Reticles */}
                 {showOverlays && (
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                     {/* Outer 45 degree boundary circle */}
-                    <div className="w-[360px] h-[360px] rounded-full border border-sky-400/40 border-dashed animate-pulse-subtle" />
+                    <div className="w-[230px] h-[230px] sm:w-[300px] sm:h-[300px] lg:w-[360px] lg:h-[360px] rounded-full border border-sky-400/40 border-dashed animate-pulse-subtle" />
 
                     {/* Fovea central reticle */}
                     <div className="absolute top-[48%] left-[54%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                      <div className="w-8 h-8 rounded-full border border-emerald-400/70 border-dashed flex items-center justify-center">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-emerald-400/70 border-dashed flex items-center justify-center">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       </div>
-                      <span className="mt-1 px-1.5 py-0.5 rounded bg-black/70 text-[9px] font-bold text-emerald-300 tracking-wider">
+                      <span className="mt-0.5 sm:mt-1 px-1 sm:px-1.5 py-0.5 rounded bg-black/70 text-[8px] sm:text-[9px] font-bold text-emerald-300 tracking-wider">
                         FOVEA
                       </span>
                     </div>
 
                     {/* Optic Disc reticle */}
                     <div className="absolute top-[44%] left-[22%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                      <div className="w-14 h-14 rounded-full border-2 border-sky-400/80 flex items-center justify-center">
+                      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-sky-400/80 flex items-center justify-center">
                         <div className="w-1 h-1 rounded-full bg-sky-400" />
                       </div>
-                      <span className="mt-1 px-1.5 py-0.5 rounded bg-black/70 text-[9px] font-bold text-sky-300 tracking-wider">
+                      <span className="mt-0.5 sm:mt-1 px-1 sm:px-1.5 py-0.5 rounded bg-black/70 text-[8px] sm:text-[9px] font-bold text-sky-300 tracking-wider">
                         DISC (OD)
                       </span>
                     </div>
@@ -211,28 +211,28 @@ export const AnalyzeLeftEye = () => {
               </motion.div>
 
               {/* Viewer HUD Info Cards (Top Left & Top Right) */}
-              <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-2 rounded-xl text-left border border-white/10 text-white space-y-0.5">
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">
-                  ACQUISITION MODE
+              <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 bg-black/70 backdrop-blur-md px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-left border border-white/10 text-white space-y-0.5 max-w-[45%]">
+                <span className="text-[9px] sm:text-[10px] font-mono text-slate-400 block uppercase truncate">
+                  ACQUISITION
                 </span>
-                <span className="text-xs font-semibold text-sky-200">
-                  Fundus 45° Non-Mydriatic
+                <span className="text-[11px] sm:text-xs font-semibold text-sky-200 block truncate">
+                  Fundus 45° Non-Myd
                 </span>
               </div>
 
-              <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-2 rounded-xl text-right border border-white/10 text-white space-y-0.5">
-                <span className="text-[10px] font-mono text-slate-400 block uppercase">
-                  SENSOR CALIBRATION
+              <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 bg-black/70 backdrop-blur-md px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-right border border-white/10 text-white space-y-0.5 max-w-[45%]">
+                <span className="text-[9px] sm:text-[10px] font-mono text-slate-400 block uppercase truncate">
+                  CALIBRATION
                 </span>
-                <span className="text-xs font-semibold text-emerald-300">
+                <span className="text-[11px] sm:text-xs font-semibold text-emerald-300 block truncate">
                   Sharpness 98.4%
                 </span>
               </div>
             </div>
 
             {/* Bottom verified image pill bar */}
-            <div className="bg-[#f6f5fe] rounded-2xl p-3.5 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-3">
+            <div className="bg-[#f6f5fe] rounded-2xl p-3 sm:p-3.5 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                 <span className="font-bold text-[#0c1236]">{leftEyeFileMeta.name}</span>
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#0284c7] text-white">
                   VERIFIED
@@ -242,17 +242,17 @@ export const AnalyzeLeftEye = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={() => navigate('/new-screening/left-eye')}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-semibold text-slate-700 hover:bg-slate-50"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 bg-white border border-slate-200 rounded-lg font-semibold text-slate-700 hover:bg-slate-50 min-h-[40px] sm:min-h-0"
                 >
                   <RefreshCw className="w-3 h-3 text-slate-500" />
                   <span>Replace Image</span>
                 </button>
                 <button
                   onClick={() => showToast('Frame re-synchronized with camera', 'info')}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-semibold text-slate-700 hover:bg-slate-50"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 bg-white border border-slate-200 rounded-lg font-semibold text-slate-700 hover:bg-slate-50 min-h-[40px] sm:min-h-0"
                 >
                   <Camera className="w-3 h-3 text-slate-500" />
                   <span>Re-fetch Camera</span>
@@ -339,7 +339,7 @@ export const AnalyzeLeftEye = () => {
 
               <button
                 onClick={handleStartAnalysis}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-md transition-all active:scale-[0.98] w-full sm:w-auto min-h-[44px] sm:min-h-0"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Analyze Left Eye →</span>
@@ -349,7 +349,7 @@ export const AnalyzeLeftEye = () => {
         </div>
       ) : isAnalyzing ? (
         /* Progress Simulation State */
-        <div className="bg-white rounded-3xl p-12 border border-slate-100 shadow-clinical text-center space-y-6 max-w-2xl mx-auto">
+        <div className="bg-white rounded-3xl p-6 sm:p-12 border border-slate-100 shadow-clinical text-center space-y-6 max-w-2xl mx-auto">
           <div className="w-16 h-16 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center mx-auto shadow-inner animate-spin">
             <Activity className="w-8 h-8" />
           </div>
@@ -398,7 +398,7 @@ export const AnalyzeLeftEye = () => {
           {/* Side-by-side Retinal Image & AI Attention Map */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left: Original Fundus Photograph */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical flex flex-col justify-between">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical flex flex-col justify-between">
               <div className="flex items-center justify-between mb-3">
                 <div>
                   <h3 className="text-base font-bold text-[#0c1236]">Retinal Image</h3>
@@ -409,7 +409,7 @@ export const AnalyzeLeftEye = () => {
                 </span>
               </div>
 
-              <div className="relative aspect-square max-h-[360px] mx-auto bg-black rounded-2xl overflow-hidden flex items-center justify-center border border-slate-900 shadow-inner">
+              <div className="relative aspect-square max-h-[280px] sm:max-h-[340px] lg:max-h-[360px] w-full mx-auto bg-black rounded-2xl overflow-hidden flex items-center justify-center border border-slate-900 shadow-inner">
                 <img
                   src={leftEyeImage}
                   alt="Original Fundus"
@@ -423,7 +423,7 @@ export const AnalyzeLeftEye = () => {
             </div>
 
             {/* Right: AI Attention Map (Grad-CAM) */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical flex flex-col justify-between">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical flex flex-col justify-between">
               <div className="flex items-center justify-between mb-3">
                 <div>
                   <h3 className="text-base font-bold text-[#0c1236]">AI Attention Map</h3>
@@ -435,7 +435,7 @@ export const AnalyzeLeftEye = () => {
               </div>
 
               {/* Heatmap overlay image container */}
-              <div className="relative aspect-square max-h-[360px] mx-auto bg-black rounded-2xl overflow-hidden flex items-center justify-center border border-slate-900 shadow-inner">
+              <div className="relative aspect-square max-h-[280px] sm:max-h-[340px] lg:max-h-[360px] w-full mx-auto bg-black rounded-2xl overflow-hidden flex items-center justify-center border border-slate-900 shadow-inner">
                 <img
                   src={leftEyeImage}
                   alt="Fundus Heatmap base"
@@ -455,7 +455,7 @@ export const AnalyzeLeftEye = () => {
           </div>
 
           {/* Diagnostic Evaluation Card */}
-          <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-6">
+          <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
@@ -466,7 +466,7 @@ export const AnalyzeLeftEye = () => {
                 </h3>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-white tracking-wider">
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-white tracking-wider self-start sm:self-auto">
                 <span className="w-1.5 h-1.5 rounded-full bg-white" />
                 {leftEyeAnalysis.result}
               </span>
@@ -477,7 +477,7 @@ export const AnalyzeLeftEye = () => {
             </p>
 
             {/* 4 Metric Pill Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
                   AI MODEL CONFIDENCE
@@ -528,36 +528,36 @@ export const AnalyzeLeftEye = () => {
             </div>
 
             {/* Bottom Actions */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-100">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                 <Link
                   to={`/patients/${selectedPatient?.id || 'PAT-10284'}`}
-                  className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="px-4 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors text-center min-h-[44px] sm:min-h-0 flex items-center justify-center"
                 >
                   View Patient History
                 </Link>
                 <button
                   onClick={() => showToast('Generated mock Left Eye Tele-Report (PDF)', 'success')}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors min-h-[44px] sm:min-h-0"
                 >
                   <Download className="w-3.5 h-3.5 text-slate-500" />
                   <span>Download Left Eye Tele-Report</span>
                 </button>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                 <button
                   onClick={() => {
                     setHasAnalyzed(false);
                     setLeftEyeAnalysis(prev => ({ ...prev, isCompleted: false }));
                   }}
-                  className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="px-4 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors text-center min-h-[44px] sm:min-h-0"
                 >
                   Retake Left Eye
                 </button>
                 <button
                   onClick={() => navigate('/new-screening/right-eye')}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-sm transition-all active:scale-[0.98]"
+                  className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-sm transition-all active:scale-[0.98] min-h-[44px] sm:min-h-0"
                 >
                   <span>Continue to Right Eye</span>
                   <ArrowRight className="w-4 h-4" />

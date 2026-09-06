@@ -84,17 +84,17 @@ export const Patients = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => showToast('Exporting Patients Directory (CSV / DICOM Index)', 'success')}
-            className="flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs transition-colors"
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs transition-colors min-h-[44px] sm:min-h-0"
           >
             <Download className="w-3.5 h-3.5 text-slate-500" />
             <span>Export Directory</span>
           </button>
           <button
             onClick={() => showToast('Opened new patient registration modal', 'info')}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors"
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors min-h-[44px] sm:min-h-0"
           >
             <UserPlus className="w-3.5 h-3.5" />
             <span>+ Add New Patient</span>
@@ -130,17 +130,17 @@ export const Patients = () => {
       </div>
 
       {/* Search & Filter Controls */}
-      <div className="bg-white rounded-3xl p-5 border border-slate-100 shadow-clinical space-y-4">
+      <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-100 shadow-clinical space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           {/* Search bar */}
-          <div className="relative flex-1 max-w-md">
+          <div className="relative flex-1 w-full md:max-w-md">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search patient name, ID, or phone..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 text-xs bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0284c7] focus:border-[#0284c7]"
+              className="w-full pl-10 pr-4 py-2.5 sm:py-2 text-xs bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0284c7] focus:border-[#0284c7]"
             />
           </div>
 
@@ -172,8 +172,8 @@ export const Patients = () => {
         </div>
 
         {/* Quick Filter Chips */}
-        <div className="flex items-center gap-2 flex-wrap pt-1">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 max-w-full">
+          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1 flex-shrink-0">
             Quick Select:
           </span>
           {quickFilters.map((qf) => (
@@ -188,7 +188,7 @@ export const Patients = () => {
                   setSearchQuery('');
                 }
               }}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 sm:py-1 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap flex-shrink-0 ${
                 selectedPatientId === qf.id
                   ? 'bg-sky-100 text-[#0284c7] border border-sky-300'
                   : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
@@ -201,12 +201,12 @@ export const Patients = () => {
       </div>
 
       {/* Featured Patient Detail Card (Arun Kumar) */}
-      <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-100 shadow-clinical space-y-6">
+      <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-slate-100 shadow-clinical space-y-6">
         {/* Top Header of Detail Card */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div>
-            <div className="flex items-center gap-3 flex-wrap">
-              <h2 className="text-2xl font-bold text-[#0c1236]">
+            <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#0c1236]">
                 {activePatient.name}
               </h2>
               <span className="px-2.5 py-0.5 rounded text-xs font-bold bg-sky-100 text-[#0284c7]">
@@ -222,24 +222,24 @@ export const Patients = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto">
             <button
               onClick={() => showToast('Editing patient profile details...', 'info')}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors min-h-[44px] sm:min-h-0"
             >
               <Edit3 className="w-3.5 h-3.5 text-slate-500" />
               <span>Edit Details</span>
             </button>
             <button
               onClick={() => showToast('Downloading complete patient clinical dossier (PDF)', 'success')}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors min-h-[44px] sm:min-h-0"
             >
               <Download className="w-3.5 h-3.5 text-slate-500" />
               <span>Download Dossier</span>
             </button>
             <button
               onClick={() => handleStartScreeningForPatient(activePatient)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors min-h-[44px] sm:min-h-0"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>+ Start New Screening</span>
@@ -355,7 +355,8 @@ export const Patients = () => {
             SCREENING LONGITUDINAL HISTORY
           </h3>
 
-          <div className="overflow-x-auto">
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
@@ -393,12 +394,45 @@ export const Patients = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Mobile Cards View */}
+          <div className="md:hidden space-y-3">
+            {patientLongitudinalHistory.map((item, idx) => (
+              <div key={idx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-slate-900">{item.session}</span>
+                  <StatusBadge text={item.overall} />
+                </div>
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200 text-[11px]">
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-bold">Left Eye</span>
+                    <span className="font-semibold text-emerald-700">{item.leftEye}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-bold">Right Eye</span>
+                    <span className={`font-semibold ${item.rightEye.includes('NPDR') ? 'text-[#8b0000]' : 'text-slate-700'}`}>
+                      {item.rightEye}
+                    </span>
+                  </div>
+                </div>
+                <div className="pt-2 border-t border-slate-200 flex justify-end">
+                  <button
+                    onClick={() => showToast(`Opening ${item.reportId}`, 'info')}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[#0284c7] font-semibold text-xs min-h-[36px]"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>{item.reportId}</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* ALL PATIENTS Table */}
-      <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
           <div>
             <h3 className="text-lg font-bold text-[#0c1236]">ALL PATIENTS</h3>
             <p className="text-xs text-slate-500">Registry directory for Community Eye Care Unit 3</p>
@@ -408,7 +442,8 @@ export const Patients = () => {
           </span>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
@@ -453,14 +488,62 @@ export const Patients = () => {
           </table>
         </div>
 
+        {/* Mobile Cards View */}
+        <div className="md:hidden space-y-3">
+          {paginatedPatients.map((patient) => (
+            <div key={patient.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2.5">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 rounded text-xs font-bold bg-sky-100 text-[#0284c7]">
+                    {patient.id}
+                  </span>
+                  <span className="font-bold text-slate-900 text-sm">{patient.name}</span>
+                </div>
+                <StatusBadge text={patient.lastScreeningResult} />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-slate-600 text-[11px]">
+                <div>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Age / Gender</span>
+                  <span className="font-medium text-slate-800">{patient.age} Yrs • {patient.gender}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Phone</span>
+                  <span className="font-medium text-slate-800">{patient.phone}</span>
+                </div>
+              </div>
+
+              <div className="text-[11px]">
+                <span className="text-slate-400 block text-[10px] uppercase font-bold">Condition</span>
+                <span className="px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-700 font-medium inline-block mt-0.5">
+                  {patient.systemicCondition}
+                </span>
+              </div>
+
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-between gap-2">
+                <span className="text-[11px] text-slate-500">
+                  Last: <strong className="text-slate-700">{patient.lastScreeningDate}</strong>
+                </span>
+                <Link
+                  to={`/patients/${patient.id}`}
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#0284c7] text-white rounded-xl text-xs font-bold shadow-xs min-h-[44px]"
+                >
+                  <span>View Patient</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Pagination Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500 gap-2">
           <div>Showing {paginatedPatients.length} of {filteredPatients.length} patients</div>
           <div className="flex items-center gap-1">
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40 flex items-center justify-center text-slate-700"
+              className="w-8 h-8 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40 flex items-center justify-center text-slate-700"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -468,7 +551,7 @@ export const Patients = () => {
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40 flex items-center justify-center text-slate-700"
+              className="w-8 h-8 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40 flex items-center justify-center text-slate-700"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

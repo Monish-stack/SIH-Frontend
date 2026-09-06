@@ -3,7 +3,7 @@ import { liveScanDefault } from '../../data/screenings';
 
 export const LiveScanCard = () => {
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-clinical flex flex-col justify-between h-full">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-100 shadow-clinical flex flex-col justify-between h-full min-w-0">
       {/* Card Header with solid navy dot */}
       <div className="flex items-center justify-between">
         <h2 className="text-base font-bold text-[#0c1236]">Live Scan Status</h2>

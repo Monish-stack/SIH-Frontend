@@ -12,56 +12,58 @@ export const WorkflowStepper = ({ currentStep = 1 }) => {
   ];
 
   return (
-    <div className="inline-flex items-center bg-[#f4f3fd] p-1 rounded-2xl border border-slate-200/70 shadow-xs select-none">
-      {steps.map((step, idx) => {
-        const isCompleted = step.number < currentStep;
-        const isActive = step.number === currentStep;
-        const isPending = step.number > currentStep;
+    <div className="w-full sm:w-auto overflow-x-auto no-scrollbar py-0.5">
+      <div className="inline-flex items-center bg-[#f4f3fd] p-1 rounded-2xl border border-slate-200/70 shadow-xs select-none min-w-max">
+        {steps.map((step, idx) => {
+          const isCompleted = step.number < currentStep;
+          const isActive = step.number === currentStep;
+          const isPending = step.number > currentStep;
 
-        return (
-          <React.Fragment key={step.number}>
-            {/* Step Element */}
-            {isActive ? (
-              <button
-                onClick={() => navigate(step.path)}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#0284c7] text-white shadow-xs"
-              >
-                <span className="w-4 h-4 rounded-full bg-white text-[#0284c7] flex items-center justify-center text-[10px] font-bold">
-                  {step.number}
-                </span>
-                <span>{step.label}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-white ml-0.5" />
-              </button>
-            ) : isCompleted ? (
-              <button
-                onClick={() => navigate(step.path)}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 hover:bg-slate-50 shadow-2xs cursor-pointer transition-colors"
-              >
-                <span className="w-4 h-4 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center text-[11px] font-bold">
-                  ✓
-                </span>
-                <span>{step.label}</span>
-              </button>
-            ) : (
-              <div className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-slate-500 cursor-default">
-                <span className="w-4 h-4 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] font-bold">
-                  {step.number}
-                </span>
-                <span>{step.label}</span>
-              </div>
-            )}
+          return (
+            <React.Fragment key={step.number}>
+              {/* Step Element */}
+              {isActive ? (
+                <button
+                  onClick={() => navigate(step.path)}
+                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-[#0284c7] text-white shadow-xs whitespace-nowrap"
+                >
+                  <span className="w-4 h-4 rounded-full bg-white text-[#0284c7] flex items-center justify-center text-[10px] font-bold">
+                    {step.number}
+                  </span>
+                  <span>{step.label}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-white ml-0.5" />
+                </button>
+              ) : isCompleted ? (
+                <button
+                  onClick={() => navigate(step.path)}
+                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-white text-slate-800 hover:bg-slate-50 shadow-2xs cursor-pointer transition-colors whitespace-nowrap"
+                >
+                  <span className="w-4 h-4 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center text-[11px] font-bold">
+                    ✓
+                  </span>
+                  <span>{step.label}</span>
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-slate-500 cursor-default whitespace-nowrap">
+                  <span className="w-4 h-4 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] font-bold">
+                    {step.number}
+                  </span>
+                  <span>{step.label}</span>
+                </div>
+              )}
 
-            {/* Connecting line */}
-            {idx < steps.length - 1 && (
-              <div
-                className={`w-6 h-[1.5px] mx-1 transition-colors ${
-                  step.number < currentStep ? 'bg-[#0284c7]' : 'bg-slate-300'
-                }`}
-              />
-            )}
-          </React.Fragment>
-        );
-      })}
+              {/* Connecting line */}
+              {idx < steps.length - 1 && (
+                <div
+                  className={`w-3 sm:w-6 h-[1.5px] mx-0.5 sm:mx-1 transition-colors flex-shrink-0 ${
+                    step.number < currentStep ? 'bg-[#0284c7]' : 'bg-slate-300'
+                  }`}
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };

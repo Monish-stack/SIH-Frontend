@@ -138,7 +138,7 @@ export const UploadLeftEye = () => {
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={onDrop}
-          className={`relative border-2 border-dashed rounded-3xl p-10 lg:p-14 text-center transition-all ${
+          className={`relative border-2 border-dashed rounded-3xl p-6 sm:p-10 lg:p-14 text-center transition-all ${
             isDragging
               ? 'border-[#0284c7] bg-sky-50/50 scale-[1.005]'
               : 'border-[#0284c7] bg-[#ffffff] hover:bg-slate-50/30'
@@ -154,11 +154,11 @@ export const UploadLeftEye = () => {
 
           <div className="flex flex-col items-center justify-center max-w-md mx-auto space-y-3">
             {/* Center Folder/Image icon circle */}
-            <div className="w-16 h-16 rounded-full bg-[#dcf3f9] text-slate-500 flex items-center justify-center shadow-xs">
-              <FolderUp className="w-8 h-8 text-slate-500" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#dcf3f9] text-slate-500 flex items-center justify-center shadow-xs">
+              <FolderUp className="w-7 h-7 sm:w-8 sm:h-8 text-slate-500" />
             </div>
 
-            <h3 className="text-lg font-bold text-[#0c1236]">
+            <h3 className="text-base sm:text-lg font-bold text-[#0c1236]">
               Drop fundus images here
             </h3>
 
@@ -171,7 +171,7 @@ export const UploadLeftEye = () => {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="px-6 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-xs transition-all duration-150 active:scale-[0.98]"
+                className="px-6 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-xs transition-all duration-150 active:scale-[0.98] min-h-[44px] sm:min-h-0"
               >
                 Browse Files
               </button>
@@ -205,10 +205,10 @@ export const UploadLeftEye = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs transition-colors min-h-[44px] sm:min-h-0"
             >
               <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
               <span>Replace Image</span>
@@ -216,7 +216,7 @@ export const UploadLeftEye = () => {
 
             <button
               onClick={() => showToast('Re-fetching latest live frame from Canon/Nidek camera...', 'info')}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold shadow-2xs transition-colors min-h-[44px] sm:min-h-0"
             >
               <Camera className="w-3.5 h-3.5 text-slate-500" />
               <span>Re-fetch Camera</span>
@@ -242,7 +242,7 @@ export const UploadLeftEye = () => {
 
           <button
             onClick={() => navigate('/new-screening/left-eye/analyzing')}
-            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-xs transition-all active:scale-[0.98]"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-xs transition-all active:scale-[0.98] w-full sm:w-auto min-h-[44px] sm:min-h-0"
           >
             <span>Analyze Left Eye →</span>
           </button>
