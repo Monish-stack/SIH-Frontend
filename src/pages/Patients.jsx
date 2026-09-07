@@ -15,34 +15,29 @@ import {
   ChevronLeft, 
   ChevronRight,
   Filter,
-  ArrowRight
+  ArrowRight,
+  X
 } from 'lucide-react';
-import { patientsData, patientLongitudinalHistory } from '../data/patients';
+import { patientLongitudinalHistory } from '../data/patients';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { useScreening } from '../context/ScreeningContext';
+import { AddNewPatientModal } from '../components/common/AddNewPatientModal';
 
 export const Patients = () => {
   const navigate = useNavigate();
-  const { setSelectedPatient, showToast } = useScreening();
+  const { patients, addPatient, setSelectedPatient, showToast } = useScreening();
 
-  const [searchQuery, setSearchQuery] = useState('Arun Kumar');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedPatientId, setSelectedPatientId] = useState('PAT-10284');
   const [statusFilter, setStatusFilter] = useState('All Cases');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAddPatientOpen, setIsAddPatientOpen] = useState(false);
   const pageSize = 5;
 
   // Selected patient for the featured active card
-  const activePatient = patientsData.find(p => p.id === selectedPatientId) || patientsData[0];
+  const activePatient = (patients || []).find(p => p.id === selectedPatientId) || (patients && patients[0]);
 
-  // Quick filter chips
-  const quickFilters = [
-    { label: 'Arun Kumar (PAT-10284)', id: 'PAT-10284', query: 'Arun' },
-    { label: 'PAT-10283 (Priya Sharma)', id: 'PAT-10283', query: 'Priya' },
-    { label: 'PAT-10280 (Rajesh Varma)', id: 'PAT-10280', query: 'Rajesh' },
-    { label: 'High Risk Referrals', id: null, query: '' }
-  ];
-
-  const filteredPatients = patientsData.filter(p => {
+  const filteredPatients = (patients || []).filter(p => {
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       const match = p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q);
@@ -93,8 +88,8 @@ export const Patients = () => {
             <span>Export Directory</span>
           </button>
           <button
-            onClick={() => showToast('Opened new patient registration modal', 'info')}
-            className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-colors min-h-[44px] sm:min-h-0"
+            onClick={() => setIsAddPatientOpen(true)}
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs font-bold shadow-sm transition-all hover:shadow cursor-pointer min-h-[44px] sm:min-h-0 active:scale-95"
           >
             <UserPlus className="w-3.5 h-3.5" />
             <span>+ Add New Patient</span>
@@ -108,7 +103,9 @@ export const Patients = () => {
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Total Patients
           </span>
-          <span className="text-3xl font-extrabold text-[#0c1236] block mt-2">248</span>
+          <span className="text-3xl font-extrabold text-[#0c1236] block mt-2">
+            {242 + (patients ? patients.length : 6)}
+          </span>
           <span className="text-xs text-emerald-600 font-semibold block mt-1">+12 this month</span>
         </div>
 
@@ -140,8 +137,18 @@ export const Patients = () => {
               placeholder="Search patient name, ID, or phone..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 sm:py-2 text-xs bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0284c7] focus:border-[#0284c7]"
+              className="w-full pl-10 pr-9 py-2.5 sm:py-2 text-xs bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0284c7] focus:border-[#0284c7]"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 cursor-pointer"
+                title="Clear search"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
 
           {/* Filters */}
@@ -169,34 +176,6 @@ export const Patients = () => {
               <option>Sort: Name</option>
             </select>
           </div>
-        </div>
-
-        {/* Quick Filter Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 max-w-full">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1 flex-shrink-0">
-            Quick Select:
-          </span>
-          {quickFilters.map((qf) => (
-            <button
-              key={qf.label}
-              onClick={() => {
-                if (qf.id) {
-                  setSelectedPatientId(qf.id);
-                  setSearchQuery(qf.query);
-                } else {
-                  setStatusFilter('Referable');
-                  setSearchQuery('');
-                }
-              }}
-              className={`px-3 py-1.5 sm:py-1 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap flex-shrink-0 ${
-                selectedPatientId === qf.id
-                  ? 'bg-sky-100 text-[#0284c7] border border-sky-300'
-                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-              }`}
-            >
-              {qf.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -558,6 +537,21 @@ export const Patients = () => {
           </div>
         </div>
       </div>
+
+      {/* Add New Patient Registration Modal */}
+      <AddNewPatientModal
+        isOpen={isAddPatientOpen}
+        onClose={() => setIsAddPatientOpen(false)}
+        onPatientAdded={(newPatient, immediateScreening) => {
+          addPatient(newPatient);
+          setSelectedPatientId(newPatient.id);
+          setSearchQuery(newPatient.name);
+          if (immediateScreening) {
+            setSelectedPatient(newPatient);
+            navigate('/new-screening/left-eye');
+          }
+        }}
+      />
     </div>
   );
 };

@@ -241,25 +241,26 @@ export const RecentScreeningsTable = () => {
       {/* Pagination Footer */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100 text-xs text-slate-500">
         <div>
-          Showing {paginatedData.length} of 24 screened patients
+          Showing {paginatedData.length} of {filteredData.length} screened patients
         </div>
 
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="w-8 h-8 sm:w-6 sm:h-6 rounded-md bg-slate-300 hover:bg-slate-400 disabled:opacity-50 flex items-center justify-center text-slate-700 touch-manipulation"
+            className="w-8 h-8 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors cursor-pointer touch-manipulation"
+            aria-label="Previous page"
           >
             <ChevronLeft className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
           </button>
-          {[1, 2, 3].map((page) => (
+          {Array.from({ length: Math.max(1, totalPages) }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`w-8 h-8 sm:w-6 sm:h-6 rounded-md text-xs font-bold transition-colors touch-manipulation ${
+              className={`w-8 h-8 sm:w-7 sm:h-7 rounded-lg text-xs font-bold transition-all cursor-pointer touch-manipulation ${
                 currentPage === page
-                  ? 'bg-[#0284c7] text-white'
-                  : 'bg-[#0284c7] text-white hover:bg-[#0369a1]'
+                  ? 'bg-[#0284c7] hover:bg-[#0369a1] text-white shadow-xs'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900'
               }`}
             >
               {page}
@@ -268,7 +269,8 @@ export const RecentScreeningsTable = () => {
           <button
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="w-8 h-8 sm:w-6 sm:h-6 rounded-md bg-[#0284c7] hover:bg-[#0369a1] disabled:opacity-50 flex items-center justify-center text-white touch-manipulation"
+            className="w-8 h-8 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors cursor-pointer touch-manipulation"
+            aria-label="Next page"
           >
             <ChevronRight className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
           </button>

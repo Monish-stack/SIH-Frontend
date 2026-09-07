@@ -527,39 +527,31 @@ export const AnalyzeLeftEye = () => {
               </div>
             </div>
 
-            {/* Bottom Actions */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-100">
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-                <Link
-                  to={`/patients/${selectedPatient?.id || 'PAT-10284'}`}
-                  className="px-4 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors text-center min-h-[44px] sm:min-h-0 flex items-center justify-center"
-                >
-                  View Patient History
-                </Link>
-                <button
-                  onClick={() => showToast('Generated mock Left Eye Tele-Report (PDF)', 'success')}
-                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors min-h-[44px] sm:min-h-0"
-                >
-                  <Download className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Download Left Eye Tele-Report</span>
-                </button>
+            {/* Bottom Actions - Two Options */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-5 border-t border-slate-100">
+              <div className="text-xs text-slate-500 flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
+                <span>Diagnostic review ready. Retake image or proceed to Right Eye scan.</span>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
                 <button
                   onClick={() => {
                     setHasAnalyzed(false);
                     setLeftEyeAnalysis(prev => ({ ...prev, isCompleted: false }));
+                    showToast('Ready to retake Left Eye fundus photograph', 'info');
+                    navigate('/new-screening/left-eye');
                   }}
-                  className="px-4 py-2.5 sm:py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors text-center min-h-[44px] sm:min-h-0"
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 rounded-xl text-xs font-bold text-slate-700 transition-all text-center min-h-[44px] sm:min-h-0 cursor-pointer active:scale-[0.98] shadow-2xs"
                 >
-                  Retake Left Eye
+                  <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Retake Left eye</span>
                 </button>
                 <button
                   onClick={() => navigate('/new-screening/right-eye')}
-                  className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-sm transition-all active:scale-[0.98] min-h-[44px] sm:min-h-0"
+                  className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl shadow-sm hover:shadow transition-all active:scale-[0.98] min-h-[44px] sm:min-h-0 cursor-pointer"
                 >
-                  <span>Continue to Right Eye</span>
+                  <span>Proceed to right eye</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

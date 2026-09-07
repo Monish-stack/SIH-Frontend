@@ -23,9 +23,9 @@ import { useScreening } from '../context/ScreeningContext';
 export const PatientDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { setSelectedPatient, showToast } = useScreening();
+  const { patients, setSelectedPatient, showToast } = useScreening();
 
-  const patient = patientsData.find(p => p.id === id) || patientsData[0];
+  const patient = (patients || []).find(p => p.id === id) || patientsData.find(p => p.id === id) || patientsData[0];
 
   const handleStartScreening = () => {
     setSelectedPatient(patient);

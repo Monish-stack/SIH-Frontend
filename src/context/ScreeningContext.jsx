@@ -4,9 +4,43 @@ import { patientsData } from '../data/patients';
 const ScreeningContext = createContext(null);
 
 export const ScreeningProvider = ({ children }) => {
+  // Patients Directory State
+  const [patients, setPatients] = useState(patientsData);
+
   // Default demo patient Arun Kumar
-  const defaultPatient = patientsData.find(p => p.id === "PAT-10284") || patientsData[0];
+  const defaultPatient = patients.find(p => p.id === "PAT-10284") || patients[0];
   const [selectedPatient, setSelectedPatient] = useState(defaultPatient);
+
+  const addPatient = (patientInput) => {
+    const newId = `PAT-${Math.floor(10350 + Math.random() * 650)}`;
+    const newPatient = {
+      id: newId,
+      status: "Registered - Walk-In",
+      triagePriority: patientInput.triagePriority || "Normal Routine",
+      systemicCondition: patientInput.systemicCondition || "None Reported",
+      duration: patientInput.duration || "New Intake",
+      hypertension: patientInput.hypertension || "Negative",
+      bp: patientInput.bp || "120/80 mmHg",
+      insulinDependent: patientInput.insulinDependent || "No",
+      medication: patientInput.medication || "None",
+      hba1c: patientInput.hba1c ? (patientInput.hba1c.includes('%') ? patientInput.hba1c : `${patientInput.hba1c}%`) : "6.0%",
+      hba1cRisk: parseFloat(patientInput.hba1c || 6) >= 8.0 ? "Elevated Risk" : parseFloat(patientInput.hba1c || 6) >= 7.0 ? "Moderate Risk" : "Normal Range",
+      lastScreeningDate: "Intake Today",
+      lastScreeningResult: "Pending Baseline Fundus",
+      captureStation: "Canon CR-2 AF",
+      dicomStatus: "DICOM Ready",
+      recentFundusEye: "Bilateral Intake",
+      readyForCapture: true,
+      tags: patientInput.tags || [patientInput.systemicCondition || "Routine Intake"],
+      ...patientInput,
+      id: patientInput.id || newId
+    };
+
+    setPatients(prev => [newPatient, ...prev]);
+    setSelectedPatient(newPatient);
+    showToast(`Patient ${newPatient.name} (${newPatient.id}) registered successfully!`, 'success');
+    return newPatient;
+  };
 
   // Left Eye State
   const [leftEyeImage, setLeftEyeImage] = useState('/assets/fundus/left_eye_normal.jpg');
@@ -141,6 +175,9 @@ export const ScreeningProvider = ({ children }) => {
   return (
     <ScreeningContext.Provider
       value={{
+        patients,
+        setPatients,
+        addPatient,
         selectedPatient,
         setSelectedPatient,
         leftEyeImage,

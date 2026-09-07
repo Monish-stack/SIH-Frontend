@@ -7,7 +7,7 @@ export const hourlyIntakeData = [
   { hour: "02 PM", normal: 4, review: 2, referable: 0, total: 6 },
   { hour: "03 PM", normal: 5, review: 1, referable: 2, total: 8 },
   { hour: "04 PM", normal: 3, review: 2, referable: 0, total: 5 },
-  { hour: "05 PM", normal: 0, review: 0, referable: 0, total: 0, isProjected: true }
+  { hour: "05 PM", normal: 0, review: 0, referable: 0, projected: 1.2, total: 0, isProjected: true }
 ];
 
 export const analyticsKpis = {

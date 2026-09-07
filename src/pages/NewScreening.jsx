@@ -17,17 +17,18 @@ import {
 } from 'lucide-react';
 import { WorkflowStepper } from '../components/common/WorkflowStepper';
 import { useScreening } from '../context/ScreeningContext';
-import { patientsData } from '../data/patients';
+import { AddNewPatientModal } from '../components/common/AddNewPatientModal';
 
 export const NewScreening = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const initialQuery = searchParams.get('q') || 'Kumar';
+  const initialQuery = searchParams.get('q') || '';
   const [searchTerm, setSearchTerm] = useState(initialQuery);
   const [filterType, setFilterType] = useState('all');
-  const { setSelectedPatient, showToast } = useScreening();
+  const [isAddPatientOpen, setIsAddPatientOpen] = useState(false);
+  const { patients, addPatient, setSelectedPatient, showToast } = useScreening();
 
-  const filteredPatients = patientsData.filter(p => {
+  const filteredPatients = (patients || []).filter(p => {
     const matchesSearch = 
       p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.id.toLowerCase().includes(searchTerm.toLowerCase());
@@ -277,9 +278,10 @@ export const NewScreening = () => {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto">
             <button
-              onClick={() => showToast('Walk-in intake opened: Registering temporary ID', 'info')}
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#076694] hover:bg-[#06557c] text-white text-xs font-bold rounded-xl transition-all shadow-xs min-h-[44px] sm:min-h-0"
+              onClick={() => setIsAddPatientOpen(true)}
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#076694] hover:bg-[#06557c] text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer min-h-[44px] sm:min-h-0 active:scale-95"
             >
+              <UserPlus className="w-3.5 h-3.5" />
               <span>+ Add New Patient</span>
             </button>
             <button
@@ -292,6 +294,20 @@ export const NewScreening = () => {
           </div>
         </div>
       </div>
+
+      {/* Add New Patient Registration Modal */}
+      <AddNewPatientModal
+        isOpen={isAddPatientOpen}
+        initialName={searchTerm && searchTerm !== 'Kumar' ? searchTerm : ''}
+        onClose={() => setIsAddPatientOpen(false)}
+        onPatientAdded={(newPatient, immediateScreening) => {
+          addPatient(newPatient);
+          setSelectedPatient(newPatient);
+          if (immediateScreening) {
+            navigate('/new-screening/left-eye');
+          }
+        }}
+      />
     </div>
   );
 };

@@ -82,6 +82,7 @@ export const HourlyIntakeChart = () => {
                 axisLine={false}
                 tickLine={false}
                 tick={{ fill: '#076694', fontSize: 11, fontWeight: 700 }}
+                dy={6}
               />
               <YAxis
                 hide
@@ -91,12 +92,18 @@ export const HourlyIntakeChart = () => {
               <Bar dataKey="normal" stackId="a" fill="#ffffff" radius={[0, 0, 0, 0]} />
               <Bar dataKey="review" stackId="a" fill="#80d4f6" radius={[0, 0, 0, 0]} />
               <Bar dataKey="referable" stackId="a" fill="#fca5a5" radius={[2, 2, 0, 0]} />
+              <Bar
+                dataKey="projected"
+                stackId="a"
+                fill="rgba(56, 189, 248, 0.12)"
+                stroke="#0284c7"
+                strokeDasharray="3 3"
+                strokeWidth={1.5}
+                radius={[2, 2, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
-
-        {/* Dashed outline placeholder bar specifically over the 05 PM slot */}
-        <div className="absolute right-[36px] bottom-[34px] w-[34px] h-[18px] border-2 border-dashed border-sky-400/60 rounded-xs pointer-events-none" />
       </div>
     </div>
   );
