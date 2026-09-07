@@ -164,13 +164,10 @@ export const NewScreening = () => {
         {/* Patient Cards List matching Screenshot 2 */}
         <div className="space-y-4">
           {filteredPatients.map((patient) => {
-            const isArun = patient.id === 'PAT-10284' || patient.id === 'PAT-10342';
             return (
               <div
                 key={patient.id}
-                className={`bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-150 shadow-xs ${
-                  isArun ? 'border-l-4 border-l-[#0284c7] border-slate-200' : 'border-slate-200/90'
-                }`}
+                className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 transition-all duration-150 shadow-xs hover:border-slate-300"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   {/* Patient Info Left */}
@@ -182,11 +179,6 @@ export const NewScreening = () => {
                       </span>
                       <h3 className="text-base font-bold text-[#0c1236] flex items-center gap-1.5">
                         {patient.name}
-                        {isArun && (
-                          <span className="w-4 h-4 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center text-[10px] font-bold">
-                            ✓
-                          </span>
-                        )}
                       </h3>
                       <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-50 text-[#0284c7] border border-sky-200">
                         {patient.status}
@@ -239,20 +231,11 @@ export const NewScreening = () => {
                   <div className="flex flex-col items-stretch md:items-end justify-center gap-1.5 flex-shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
                     <button
                       onClick={() => handleSelectPatient(patient)}
-                      className={`flex items-center justify-center gap-1.5 px-5 py-3 md:py-2.5 rounded-xl font-bold text-xs min-h-[44px] md:min-h-0 w-full md:w-auto transition-all duration-150 active:scale-[0.98] ${
-                        isArun
-                          ? 'bg-[#0284c7] hover:bg-[#0369a1] text-white shadow-xs'
-                          : 'bg-[#f2f0ff] hover:bg-[#e6e2ff] text-[#0284c7]'
-                      }`}
+                      className="flex items-center justify-center gap-1.5 px-5 py-3 md:py-2.5 rounded-xl font-bold text-xs min-h-[44px] md:min-h-0 w-full md:w-auto transition-all duration-150 active:scale-[0.98] bg-[#0284c7] hover:bg-[#0369a1] text-white shadow-xs cursor-pointer"
                     >
                       <span>Select Patient</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
-                    {isArun && (
-                      <span className="text-[11px] font-semibold text-teal-600 text-center md:text-right">
-                        Ready for capture
-                      </span>
-                    )}
                   </div>
                 </div>
               </div>
